@@ -1,0 +1,28 @@
+Инференс для VLLM-v1 и модели QWEN-test успешно создан.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  labels:
+    app: vllm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+  template:
+    metadata:
+      labels:
+        app: vllm
+    spec:
+      containers:
+        - name: vllm
+          image: VLLM-v1 
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: QWEN-test
+          mountPath: ...
